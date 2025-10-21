@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>VUE Demo - Local Components</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+</head>
+<body>
+
+  <div id="component1">
+    <mycomponent1></mycomponent1>
+  </div>
+
+  <div id="component2">
+    <mycomponent2></mycomponent2>
+  </div>
+
+  <div id="component3">
+    <!-- This uses <mycomponent2>, but since it is only locally
+         registered in vm2, nothing will render here -->
+    <mycomponent2></mycomponent2>
+  </div>
+
+  <script>
+    // Local component in instance #1
+    var vm1 = new Vue({
+      el: '#component1',
+      components: {
+        mycomponent1: {
+          template: '<div><h1>Welcome to VUE Components!</h1></div>'
+        }
+      }
+    });
+
+    // Local component in instance #2
+    var vm2 = new Vue({
+      el: '#component2',
+      components: {
+        mycomponent2: {
+          template: '<div><p>VUE is interesting!</p></div>'
+        }
+      }
+    });
+
+    // Instance #3 has no local components registered
+    var vm3 = new Vue({
+      el: '#component3'
+    });
+  </script>
+</body>
+</html>
